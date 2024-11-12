@@ -22,6 +22,7 @@ test.describe("CASCO Offer", () => {
   });
 
   test("Create CASCO offer (Individual)", async ({ page }) => {
+    // Test comment
     await new PageObjects(page).newOfferCascoPage();
     await new GeneralPageCasco(page).generalPageIndividual();
     await new VehiclePageCasco(page).vehiclePageCasco();

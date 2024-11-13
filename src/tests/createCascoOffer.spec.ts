@@ -30,7 +30,7 @@ test.describe("CASCO Offer", () => {
     await new ClientPageCasco(page).clientPageIndividual();
     await new OfferPageCasco(page).offerPageCasco();
   });
-  // Skip test
+  // Skip this test
   test.skip("Create CASCO offer (Legal)", async ({ page }) => {
     await new PageObjects(page).newOfferCascoPage();
     await new GeneralPageCasco(page).generalPageLegal();

@@ -30,14 +30,14 @@ test.describe("CASCO Offer", () => {
     await new ClientPageCasco(page).clientPageIndividual();
     await new OfferPageCasco(page).offerPageCasco();
   });
-
-  // test.skip("Create CASCO offer (Legal)", async ({ page }) => {
-  //   await new PageObjects(page).newOfferCascoPage();
-  //   await new GeneralPageCasco(page).generalPageLegal();
-  //   await new VehiclePageCasco(page).vehiclePageCasco();
-  //   await new CascoClausesPageCasco(page).cascoClausesPageCasco();
-  //   await new ReductionAndIncreasePageCasco(page).reductionTabCasco();
-  //   await new ClientPageCasco(page).clientPageLegal();
-  //   await new OfferPageCasco(page).offerPageCasco();
-  // });
+  // Skip test
+  test.skip("Create CASCO offer (Legal)", async ({ page }) => {
+    await new PageObjects(page).newOfferCascoPage();
+    await new GeneralPageCasco(page).generalPageLegal();
+    await new VehiclePageCasco(page).vehiclePageCasco();
+    await new CascoClausesPageCasco(page).cascoClausesPageCasco();
+    await new ReductionAndIncreasePageCasco(page).reductionTabCasco();
+    await new ClientPageCasco(page).clientPageLegal();
+    await new OfferPageCasco(page).offerPageCasco();
+  });
 });

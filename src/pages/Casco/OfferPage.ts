@@ -35,4 +35,3 @@ export class OfferPageCasco {
     console.log("Offer ID Number:", offerIdValue?.trim());
   }
 }
-

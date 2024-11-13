@@ -25,7 +25,8 @@ export const VehiclePageLocators = {
   subcategoryLabel: (page: Page) => page.getByText("Subcategory"),
   subcategoryField: (page: Page) => page.locator("#inp_vehicle_subcategory"),
   manufacturingYearLabel: (page: Page) => page.getByText("Manufacturing year*"),
-  manufacturingYearField: (page: Page) => page.locator("#inp_vehicle_construction"),
+  manufacturingYearField: (page: Page) =>
+    page.locator("#inp_vehicle_construction"),
   firstYearOdRegistrationLabel: (page: Page) =>
     page.getByText("First year of registration*"),
   firstYearOfRegistrationField: (page: Page) =>
@@ -40,5 +41,5 @@ export const VehiclePageLocators = {
     page.getByText("Registration Expiration date ITP MTPL"),
   registrationExparisonDatePicker: (page: Page) =>
     page.locator("#datepicker_inp_vehicle_registration_expiration_date"),
-  nextButton: (page:Page)=> page.getByRole('button', {name: "Next"}),
+  nextButton: (page: Page) => page.getByRole("button", { name: "Next" }),
 };

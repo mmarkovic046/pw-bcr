@@ -14,15 +14,15 @@ export class GeneralPageCasco {
     await expect(
       GeneralPageIndividualLocators.typeOfPersonLabel(this.page)
     ).toBeVisible();
-    await GeneralPageIndividualLocators.typeOfPersonField(this.page).selectOption(
-      "bcr.PersonType.CIVIL"
-    );
+    await GeneralPageIndividualLocators.typeOfPersonField(
+      this.page
+    ).selectOption("bcr.PersonType.CIVIL");
     await expect(
       GeneralPageIndividualLocators.contractTypeLabel(this.page)
     ).toBeVisible();
-    await GeneralPageIndividualLocators.contractTypeField(this.page).selectOption(
-      "bcr.Vehicle.CONTRACT_TYPE_CREDIT_CONTRACT"
-    );
+    await GeneralPageIndividualLocators.contractTypeField(
+      this.page
+    ).selectOption("bcr.Vehicle.CONTRACT_TYPE_CREDIT_CONTRACT");
     await expect(
       GeneralPageIndividualLocators.contractCurrencyLabel(this.page)
     ).toBeVisible();
@@ -38,20 +38,24 @@ export class GeneralPageCasco {
     await expect(
       GeneralPageIndividualLocators.leasingPeriodLabel(this.page)
     ).toBeVisible();
-    await GeneralPageIndividualLocators.leasingPeriodField(this.page).fill("12");
+    await GeneralPageIndividualLocators.leasingPeriodField(this.page).fill(
+      "12"
+    );
     await expect(
       GeneralPageIndividualLocators.contractLeasingDateLabel(this.page)
     ).toBeVisible();
-    await GeneralPageIndividualLocators.contractLeasingDateField(this.page).fill(
-      getTodayDate()
-    );
+    await GeneralPageIndividualLocators.contractLeasingDateField(
+      this.page
+    ).fill(getTodayDate());
     await expect(
       GeneralPageIndividualLocators.paymentMethodLabel(this.page)
     ).toBeVisible();
-    await GeneralPageIndividualLocators.paymentMethodField(this.page).selectOption(
-      "bcr.Vehicle.PAYMENT_METHOD_ANNUALLY"
-    );
-    await expect(GeneralPageIndividualLocators.nextButton(this.page)).toBeVisible();
+    await GeneralPageIndividualLocators.paymentMethodField(
+      this.page
+    ).selectOption("bcr.Vehicle.PAYMENT_METHOD_ANNUALLY");
+    await expect(
+      GeneralPageIndividualLocators.nextButton(this.page)
+    ).toBeVisible();
     await GeneralPageIndividualLocators.nextButton(this.page).click();
   }
 

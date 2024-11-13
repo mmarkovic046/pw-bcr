@@ -7,4 +7,3 @@ export function getTodayDate() {
 }
 
 const todayDate = getTodayDate();
-console.log(todayDate);

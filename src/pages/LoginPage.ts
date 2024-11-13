@@ -14,7 +14,6 @@ export class LoginPage {
     await LoginLocators.passwordInput(this.page).fill(password);
     await LoginLocators.signInButton(this.page).click();
     await LoginLocators.noButton(this.page).click();
-  
   }
   async verifySuccessfulLogin() {
     await expect(this.page.getByText("BCR Leasing")).toBeVisible();

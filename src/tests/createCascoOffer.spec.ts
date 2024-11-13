@@ -22,7 +22,6 @@ test.describe("CASCO Offer", () => {
   });
   //First test
   test("Create CASCO offer (Individual)", async ({ page }) => {
-    // Test comment
     await new PageObjects(page).newOfferCascoPage();
     await new GeneralPageCasco(page).generalPageIndividual();
     await new VehiclePageCasco(page).vehiclePageCasco();
@@ -31,8 +30,8 @@ test.describe("CASCO Offer", () => {
     await new ClientPageCasco(page).clientPageIndividual();
     await new OfferPageCasco(page).offerPageCasco();
   });
-  //Second test
-  test.skip("Create CASCO offer (Legal)", async ({ page }) => {
+
+  test("Create CASCO offer (Legal)", async ({ page }) => {
     await new PageObjects(page).newOfferCascoPage();
     await new GeneralPageCasco(page).generalPageLegal();
     await new VehiclePageCasco(page).vehiclePageCasco();

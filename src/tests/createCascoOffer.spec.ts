@@ -20,7 +20,7 @@ test.describe("CASCO Offer", () => {
     console.log("URL:", baseURL);
     console.log("E-mail:", user.email);
   });
-
+  //First test
   test("Create CASCO offer (Individual)", async ({ page }) => {
     await new PageObjects(page).newOfferCascoPage();
     await new GeneralPageCasco(page).generalPageIndividual();

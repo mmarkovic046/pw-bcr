@@ -2,90 +2,82 @@ import { defineConfig, devices } from "@playwright/test";
 import dotenv from "dotenv";
 import path from "path";
 
-// Učitavanje `.env` fajla za konfiguraciju iz okruženja
 dotenv.config({ path: path.resolve(__dirname, ".env") });
 
-// Postavljanje okruženja (default: "dev") i tipa korisnika (default: "Admin")
 const ENV = process.env.ENV || "dev";
 const USER_TYPE = process.env.USER_TYPE || "Admin";
 
-// Konfiguracija za različita okruženja sa korisničkim podacima
 const configData = {
   dev: {
-    baseURL: process.env.DEV_BASE_URL || "https://bcr.grecoit.online", // Osnovni URL za dev okruženje
+    baseURL: process.env.DEV_BASE_URL || "https://bcr.grecoit.online",
     users: {
       External: {
         email:
-          process.env.DEV_EXTERNAL_EMAIL || "test1@grecoit.onmicrosoft.com", // Email za spoljnog korisnika u dev okruženju
-        password: process.env.DEV_EXTERNAL_PASSWORD || "uzBG2UN6szx!WX4crF4r", // Lozinka za spoljnog korisnika u dev okruženju
+          process.env.DEV_EXTERNAL_EMAIL || "test1@grecoit.onmicrosoft.com",
+        password: process.env.DEV_EXTERNAL_PASSWORD || "uzBG2UN6szx!WX4crF4r",
       },
       Admin: {
-        email: process.env.DEV_ADMIN_EMAIL || "testjohndoe@grecoit.online", // Email za admin korisnika u dev okruženju
-        password: process.env.DEV_ADMIN_PASSWORD || "hL5jU+_BfP%2ugLZU*eC", // Lozinka za admin korisnika u dev okruženju
+        email: process.env.DEV_ADMIN_EMAIL || "testjohndoe@grecoit.online",
+        password: process.env.DEV_ADMIN_PASSWORD || "hL5jU+_BfP%2ugLZU*eC",
       },
     },
   },
   test: {
-    baseURL: process.env.TEST_BASE_URL || "https://bcr-testing.grecoit.online", // Osnovni URL za test okruženje
+    baseURL: process.env.TEST_BASE_URL || "https://bcr-testing.grecoit.online",
     users: {
       External: {
         email:
-          process.env.TEST_EXTERNAL_EMAIL || "test1@grecoit.onmicrosoft.com", // Email za spoljnog korisnika u test okruženju
-        password: process.env.TEST_EXTERNAL_PASSWORD || "uzBG2UN6szx!WX4crF4r", // Lozinka za spoljnog korisnika u test okruženju
+          process.env.TEST_EXTERNAL_EMAIL || "test1@grecoit.onmicrosoft.com",
+        password: process.env.TEST_EXTERNAL_PASSWORD || "uzBG2UN6szx!WX4crF4r",
       },
       Admin: {
-        email: process.env.TEST_ADMIN_EMAIL || "testjohndoe@grecoit.online", // Email za admin korisnika u test okruženju
-        password: process.env.TEST_ADMIN_PASSWORD || "hL5jU+_BfP%2ugLZU*eC", // Lozinka za admin korisnika u test okruženju
+        email: process.env.TEST_ADMIN_EMAIL || "testjohndoe@grecoit.online",
+        password: process.env.TEST_ADMIN_PASSWORD || "hL5jU+_BfP%2ugLZU*eC",
       },
     },
   },
 };
 
-// Dinamički odabir konfiguracije na osnovu ENV-a i tipa korisnika
-export const selectedConfig = configData[ENV]; // Odabrana konfiguracija za trenutno okruženje
-export const baseURL = selectedConfig.baseURL; // Osnovni URL za izabrano okruženje
-export const selectedUser = selectedConfig.users[USER_TYPE]; // Odabrani korisnik na osnovu tipa korisnika
+export const selectedConfig = configData[ENV];
+export const baseURL = selectedConfig.baseURL;
+export const selectedUser = selectedConfig.users[USER_TYPE];
 
-// Glavna konfiguracija Playwright-a
 export default defineConfig({
-  testDir: "./src/tests", // Lokacija gde se nalaze testovi
+  testDir: "./src/tests",
 
   // Timeout podešavanja
-  timeout: 90000, // Maksimalno trajanje jednog testa (90 sekundi)
+  timeout: 90000, // Maksimalno trajanje jednog testa
   expect: {
-    timeout: 30000, // Timeout za `expect` asercije (30 sekundi)
+    timeout: 30000, // Timeout za expect asercije
   },
   use: {
-    actionTimeout: 30000, // Timeout za pojedinačne akcije (30 sekundi)
-    navigationTimeout: 60000, // Timeout za navigaciju i učitavanje stranica (60 sekundi)
-    baseURL: baseURL, // Postavljanje osnovnog URL-a za sve testove
-    trace: "on-first-retry", // Omogućava snimanje traga na prvoj grešci
-    headless: true, // Izvršavanje testova bez prikazivanja prozora preglednika
-    screenshot: "only-on-failure", // Snimanje ekrana samo kada test ne uspe
-    video: "retain-on-failure", // Zadržavanje video zapisa samo za neuspele testove
-    viewport: null, // Koristi maksimalnu veličinu prozora (fullscreen)
+    actionTimeout: 30000, // Timeout za pojedinačne akcije
+    navigationTimeout: 60000, // Timeout za navigaciju i učitavanje stranica
+    baseURL: baseURL,
+    trace: "on-first-retry",
+    headless: true,
+    screenshot: "only-on-failure",
+    video: "retain-on-failure",
+    viewport: null,
     launchOptions: {
-      args: ["--start-maximized", "--window-size=1920,1080"], // Maksimizacija prozora preglednika
+      args: ["--start-maximized", "--window-size=1920,1080"],
     },
-    ignoreHTTPSErrors: true, // Ignorisanje grešaka vezanih za HTTPS sertifikate
+    ignoreHTTPSErrors: true,
   },
 
-  // Paralelno izvršavanje i retries
-  fullyParallel: true, // Omogućava potpuno paralelno izvršavanje testova
-  workers: process.env.CI ? 1 : 2, // Koristi 1 radnika na CI ili 2 lokalno
-  retries: process.env.CI ? 2 : 0, // Dva ponavljanja testa na CI, bez ponavljanja lokalno
+  fullyParallel: true,
+  workers: process.env.CI ? 1 : 2,
+  retries: process.env.CI ? 2 : 0,
 
-  // Ostale opcije
-  forbidOnly: !!process.env.CI, // Sprečava `test.only` u CI okruženju
-  reporter: "html", // HTML reporter za rezultate testova
+  forbidOnly: !!process.env.CI,
+  reporter: "html",
 
-  // Projekti za različite pretraživače
   projects: [
     {
-      name: "Microsoft Edge", // Naziv projekta za Microsoft Edge
-      use: { ...devices["Desktop Edge"], channel: "msedge" }, // Konfiguracija za Microsoft Edge
+      name: "Microsoft Edge",
+      use: { ...devices["Desktop Edge"], channel: "msedge" },
     },
-    // Dodajte druge pretraživače po potrebi
+
     // {
     //   name: "chromium",
     //   use: { ...devices["Desktop Chrome"] },
@@ -101,6 +93,5 @@ export default defineConfig({
   ],
 });
 
-// Export potrebnih vrednosti za upotrebu u testovima
-export const users = selectedConfig.users; // Lista korisnika za odabrano okruženje
-export const user = selectedUser; // Trenutno aktivni korisnik
+export const users = selectedConfig.users;
+export const user = selectedUser;
